@@ -151,7 +151,6 @@ void cavp_secure_hash_test(
                     hal5_hash_get_digest_size(algorithm)))
         {
             printf(".");
-            fflush(stdout);
         }
         else 
         {
@@ -217,7 +216,7 @@ void cavp_secure_hash_tests()
 void boot(void) 
 {
     hal5_rcc_initialize();
-    hal5_console_configure(921600, false);
+    hal5_console_configure(921600, true);
     hal5_console_clearscreen();
     hal5_console_boot_colors();
     hal5_console_dump_info();
@@ -242,9 +241,10 @@ int main(void)
 {
     boot();
 
+    cavp_secure_hash_tests();
+
     while (1) 
     {
-        cavp_secure_hash_tests();
         bsp_heartbeat();
     }
 
